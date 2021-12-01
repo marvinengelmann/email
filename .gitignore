@@ -1,2 +1,7 @@
 .DS_Store
-.vercel
+.terraform
+*.hcl
+*.tfstate
+*.backup
+*.info
+src.zip
