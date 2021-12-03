@@ -1,1 +1,3 @@
-Opens the email client directly when loading the page.
+# Redirect mailto on load
+
+Just return a ```Refresh``` header with ```0; url=mailto:your@awesome.email```.
