@@ -58,7 +58,7 @@ resource "aws_s3_bucket" "email_bucket" {
 
 resource "aws_s3_bucket_object" "email_bucket_object" {
   bucket  = aws_s3_bucket.email_bucket.id
-  key     = "email.zip"
+  key     = "${var.name}.zip"
   source  = data.archive_file.email_archive.output_path
   etag    = filemd5(data.archive_file.email_archive.output_path)
 }
@@ -68,7 +68,7 @@ resource "aws_lambda_function" "email_lambda" {
   s3_bucket         = aws_s3_bucket.email_bucket.id
   s3_key            = aws_s3_bucket_object.email_bucket_object.key
   source_code_hash  = data.archive_file.email_archive.output_base64sha256
-  function_name     = "email"  
+  function_name     = var.name 
   handler           = "index.handler"
   runtime           = "python3.8"
   role              = aws_iam_role.email_role.arn
